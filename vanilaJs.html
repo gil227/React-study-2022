@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>리액트가 없다면?</title>
+</head>
+<body>
+<span>View Count : 1</span>
+    <button id="btn">시청하기</button>
+</body>
+<script>
+    const btnTarget = document.querySelector('#btn');
+    let getCounter = document.querySelector("span");
+    let setCounter = 0;
+    function countView(){
+        setCounter = setCounter + 1;
+        getCounter.innerText = `View Count : ${setCounter}`;
+    }
+    btnTarget.addEventListener('click',countView);
+</script>
+</html>
