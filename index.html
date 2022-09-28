@@ -5,19 +5,26 @@
     <title>CDN React</title>
 </head>
 <body>
-<span>View Count : 1</span>
-    <button id="btn">시청하기</button>
+<div id="wrap"></div>
 </body>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script>
-    const btnTarget = document.querySelector('#btn');
-    let getCounter = document.querySelector("span");
-    let setCounter = 0;
-    function countView(){
-        setCounter = setCounter + 1;
-        getCounter.innerText = `View Count : ${setCounter}`;
-    }
-    btnTarget.addEventListener('click',countView);
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const renderTarget = document.querySelector("#wrap");
+    const Title = () => (
+        <h3 id="title" onMouseEnter={()=> console.log('in!')}>im gil yeah!</h3>
+    );
+    const Btn = () => (
+        <button onClick={()=>console.log('clicked!')}>Count Up!</button>
+    );
+
+    const Container = () => (
+        <div>
+            <Title/>
+            <Btn/>
+        </div>
+    );
+    ReactDOM.render(<Container/>, renderTarget);
 </script>
 </html>
