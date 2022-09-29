@@ -12,19 +12,21 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     const renderTarget = document.querySelector("#wrap");
-    const Title = () => (
-        <h3 id="title" onMouseEnter={()=> console.log('in!')}>im gil yeah!</h3>
-    );
-    const Btn = () => (
-        <button onClick={()=>console.log('clicked!')}>Count Up!</button>
-    );
-
+    let counter = 0;
+    function Counter(){
+        counter = counter + 1;
+        reRender();
+    }
+    function reRender(){
+        ReactDOM.render(<Container/>, renderTarget);
+    }
     const Container = () => (
         <div>
-            <Title/>
-            <Btn/>
+            <h3>im gil! + {counter}</h3>
+            <button onClick={Counter}>Count Up!</button>
         </div>
     );
-    ReactDOM.render(<Container/>, renderTarget);
+
+    reRender();
 </script>
 </html>
