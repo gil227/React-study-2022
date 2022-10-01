@@ -10,23 +10,23 @@
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script>
+<script type="text/babel">
     const renderTarget = document.querySelector("#wrap");
-    let counter = 0;
-    function Counter(){
-        counter = counter + 1;
-        reRender();
-    }
-    function reRender(){
-        ReactDOM.render(<App/>, renderTarget);
-    }
-    const App = () => (
-        <div>
-            <h3>im gil! + {counter}</h3>
-            <button onClick={Counter}>Count Up!</button>
-        </div>
-    );
 
-    reRender();
+    function App(){
+        const [counter, setCounter] = React.useState(0);
+        const onClick = () =>{
+            setCounter(counter + 1);
+        }
+
+        return (
+            <div>
+                <h3>im gil! + {counter}</h3>
+                <button onClick={onClick}>Count Up!</button>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App/>,renderTarget);
 </script>
 </html>
