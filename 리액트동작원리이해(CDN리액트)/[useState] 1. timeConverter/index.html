@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CDN React</title>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const renderTarget = document.querySelector("#wrap");
+
+    function App(){
+        const [minute, setMinute] = React.useState(0);
+        const [flip, setFlip] = React.useState(false);
+        const getMinute = (e) =>{
+            setMinute(e.target.value);
+        }
+        const onReset = () =>{
+            setMinute(0);
+        }
+        const onFlip = () =>{
+            onReset();
+            setFlip((crnt)=>!crnt);
+        }
+        return (
+            <div>
+                <h3>Convert Value is !</h3>
+                <label htmlFor="value1">
+                    <h3>Wrote Minute value : {minute}</h3>
+                    <input id="value1" placeholder="MM" value={flip ? minute*60 : minute} onChange={getMinute} type="number" disabled ={flip}/>
+                </label>
+                <label htmlFor="value2">
+                    <h3>Wrote Hour value : {Math.round(minute/60)}</h3>
+                    <input id="value2" placeholder="HH" value={flip ?  minute: Math.round(minute/60)} onChange={getMinute} type="number" disabled ={!flip}/>
+                </label>
+
+                <button onClick={onReset}>Reset!</button>
+                <button onClick={onFlip}>flip!</button>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App/>,renderTarget);
+</script>
+</html>
