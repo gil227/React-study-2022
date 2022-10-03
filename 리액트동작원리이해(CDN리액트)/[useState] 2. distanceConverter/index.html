@@ -44,20 +44,29 @@
     }
     function DistanceConverter(){
         const [amount, setAmount] = React.useState(0);
-        const [] = React.useState(false)
+        const [isFalse, setDisabled] = React.useState(false)
         const setDistance = (e) =>{
             setAmount(e.target.value);
+        }
+        const onFlip = () =>{
+            Reset();
+            setDisabled((current)=> !current);
+        }
+        const Reset = () =>{
+            setAmount(0);
         }
         return(
             <div>
                 <label htmlFor="valueKM">
                     <h3>Wrote Km</h3>
-                    <input id="valueKM" value={amount} onChange={setDistance} type="number" disabled/>
+                    <input id="valueKM" value={isFalse ? amount*1.609344 : amount} onChange={setDistance} type="number" disabled={isFalse}/>
                 </label>
                 <label htmlFor="valueMile">
                     <h3>Wrote Mile</h3>
-                    <input id="valueMile" value={amount} onChange={setDistance} type="number" disabled/>
+                    <input id="valueMile" value={isFalse ? amount : amount*0.621371} onChange={setDistance} type="number" disabled={!isFalse}/>
                 </label>
+                <button onClick={Reset}>Reset</button>
+                <button onClick={onFlip}>Flip!</button>
             </div>
         );
     }
@@ -68,7 +77,7 @@
             <div>
                 <h3>Convert Value is !</h3>
                 <label htmlFor="getSelect">
-                    <select value={index} onChange={onConverter} id={getSelect}>
+                    <select value={index} onChange={onConverter} id="getSelect">
                         <option value="0">TimeConverter</option>
                         <option value="1">DistanceConverter</option>
                     </select>
