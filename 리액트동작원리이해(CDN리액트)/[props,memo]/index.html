@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CDN React</title>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const renderTarget = document.querySelector("#wrap");
+    function Btn({textData,sizeScale,changeBtn}){
+        console.log(arguments);
+        return (
+            <button
+                onClick={changeBtn}
+                style={{
+                backgroundColor:"#fbba33",
+                fontSize: sizeScale ? "18px" : "14px",
+                border:0,
+                borderRadius:"10px",
+                padding:"10px 20px",
+                marginRight:"10px",
+                cursor:"pointer"
+            }}>
+                {textData}
+            </button>
+        )
+    }
+    const RememberBtn = React.memo(Btn);
+
+    function App(){
+        const [value, setValue] = React.useState("BigBtn");
+        const changeValue = () => setValue("RevertBtn");
+        return (
+            <div>
+                <RememberBtn textData={value} sizeScale="true" changeBtn={changeValue}/>
+                <RememberBtn textData="SmallBtn" sizeScale="false"/>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App/>,renderTarget);
+</script>
+</html>
