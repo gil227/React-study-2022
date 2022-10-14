@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>CDN React</title>
+</head>
+<body>
+<div id="wrap"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    const renderTarget = document.querySelector("#wrap");
+    function Btn({textData,sizeScale}){
+        return (
+            <button
+                style={{
+                backgroundColor:"#fbba33",
+                fontSize: sizeScale ? "18px" : "14px",
+                border:0,
+                borderRadius:"10px",
+                padding:"10px 20px",
+                marginRight:"10px",
+                cursor:"pointer"
+            }}>
+                {textData}
+            </button>
+        )
+    }
+    Btn.propTypes = {
+        textData:PropTypes.number.isRequired,
+        sizeScale:PropTypes.bool
+    };
+    function App(){
+        return (
+            <div>
+                <Btn textData="value" sizeScale="true"/>
+                <Btn textData={14} sizeScale="false"/>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App/>,renderTarget);
+</script>
+</html>
